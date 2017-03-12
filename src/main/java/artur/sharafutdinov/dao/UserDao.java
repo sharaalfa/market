@@ -10,8 +10,8 @@ public interface UserDao{
     User getUserByLoginAndPassword(String login, String password) throws UserDaoException;
 
     boolean registrationUser(String login, String password,
-                         String lastName, String firstName,
-                         String email, String phone);
+                             String lastName, String firstName,
+                             String email, String phone);
 
 
 }

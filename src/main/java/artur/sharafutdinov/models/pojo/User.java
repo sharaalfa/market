@@ -110,11 +110,11 @@ public class User {
 
 
 
-  public java.sql.Date getUpdatedDate() {
+  public Date getUpdatedDate() {
     return updatedDate;
   }
 
-  public void setUpdatedDate(java.sql.Date updatedDate) {
+  public void setUpdatedDate(Date updatedDate) {
     this.updatedDate = updatedDate;
   }
 

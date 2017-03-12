@@ -8,7 +8,8 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+
 
 /**
  * Created by tatar on 04.03.17.
@@ -24,8 +25,8 @@ public class UserDaoImpl implements UserDao{
     private static final String SQL_FIND_USER =
             "SELECT * FROM \"user\" WHERE login=? AND password=?;";
     private static final String SQL_CREATE_USER =
-            "INSERT INTO \"user\"(login, password," +
-                    "last_name, first_name, role_id" +
+            "INSERT INTO \"user\"(login, password, " +
+                    "last_name, first_name, role_id, " +
                     "email, phone, is_active, updated_date) " +
                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -48,11 +49,11 @@ public class UserDaoImpl implements UserDao{
                         resultSet.getString("password"),
                         resultSet.getString("last_name"),
                         resultSet.getString("first_name"),
-                        resultSet.getLong("roleId"),
+                        resultSet.getLong("role_id"),
                         resultSet.getString("email"),
                         resultSet.getString("phone"),
                         resultSet.getString("is_active"),
-                        resultSet.getDate("update_date")
+                        resultSet.getDate("updated_date")
                 );
             } else {
                 logger.debug(login + " " + password + " not found");
@@ -68,7 +69,8 @@ public class UserDaoImpl implements UserDao{
     public boolean registrationUser(String login, String password, String lastName,
                                     String firstName, String email,
                                     String phone) {
-        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
         try {
             Connection connection = Connector.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_CREATE_USER);
@@ -76,13 +78,13 @@ public class UserDaoImpl implements UserDao{
             preparedStatement.setString(2, password);
             preparedStatement.setString(3, lastName);
             preparedStatement.setString(4, firstName);
-            preparedStatement.setLong(5, 3);
+            preparedStatement.setLong(5, 2);
             preparedStatement.setString(6, email);
             preparedStatement.setString(7, phone);
             preparedStatement.setBoolean(8, true);
-            preparedStatement.setString(9, date.toString());
+            preparedStatement.setDate(9, new Date(23));
             int count = preparedStatement.executeUpdate();
-            if(count > 0) {
+            if(count > 1) {
                 logger.debug(login + " " + password + " not inserted");
             }
         } catch (SQLException e) {

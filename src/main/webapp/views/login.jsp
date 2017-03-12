@@ -6,7 +6,7 @@
 </head>
 <body>
 <div>
-    <a href="/WEB-INF/views/registration.jspgistration.jsp">Регистрация</a>
+    <a href="/registration">Регистрация</a>
     <style>
         table {
             width: 300px; /* Ширина таблицы */
@@ -20,18 +20,21 @@
     <table class="table">
 ${msg}
         <tr>
+            <form action="/login" method="post">
+
             <td for="/login">Логин:</td>
             <td><input class="form-control" type="text" name="login" id="login" value="" placeholder="Input"><td/>
             <td for="password">Пароль:</td>
             <td><input class="form-control" type="password" name="password" id="password" value="" placeholder="Input"></td>
 
             <td><input class="btn btn-default" type="submit" value="Войти" formmethod="post"></td>
+            </form>
 
         </tr>
 
 
     </table>
-    <form action="/login" method="post">
+
 
 
     </form>
